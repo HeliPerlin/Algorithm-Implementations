@@ -15,7 +15,7 @@ public class Kruskal {
         HashMap<Vertex, ArrayList<Vertex>> newNeighborsList = new HashMap<>();
         graph.sort(new EdgeComparator());
         for (Edge e: graph){
-            if (!isTherePath(e, graph, neighborsList)){
+            if (!isTherePath(e, neighborsList)){
                 edges.add(e);
                 updateNeighborsList(newNeighborsList, e);
             }
@@ -26,23 +26,32 @@ public class Kruskal {
     /**
      * checks if there is a path between the two vertices e contains
      * @param e the edge to check its vertices
-     * @param graph the graph in which to look for a path between the two vertices
      * @return true iff theres a path between the two vertices in the graph
      */
-    private static boolean isTherePath(Edge e, ArrayList<Edge> graph,
-                                       HashMap<Vertex, ArrayList<Vertex>> neighborsList){
-        return BFS.bfs(e.getV1(), e.getV2(), graph, neighborsList);
+    private static boolean isTherePath(Edge e, HashMap<Vertex, ArrayList<Vertex>> neighborsList){
+        return BFS.bfs(e.getV1(), e.getV2(), neighborsList);
     }
 
     private static HashMap<Vertex, ArrayList<Vertex>>  updateNeighborsList(HashMap<Vertex,
             ArrayList<Vertex>> neighborsList, Edge e){
         if (neighborsList.containsKey(e.getV1())){
             neighborsList.get(e.getV1()).add(e.getV2());
+        }
+        else {
+            ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
+            neighbors.add(e.getV2());
+            neighborsList.put(e.getV1(), neighbors);
             return neighborsList;
         }
-        ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
-        neighbors.add(e.getV2());
-        neighborsList.put(e.getV1(), neighbors);
+        if (neighborsList.containsKey(e.getV2())){
+            neighborsList.get(e.getV2()).add(e.getV1());
+        }
+        else {
+            ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
+            neighbors.add(e.getV1());
+            neighborsList.put(e.getV2(), neighbors);
+            return neighborsList;
+        }
         return neighborsList;
     }
 }

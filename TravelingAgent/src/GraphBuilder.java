@@ -77,11 +77,21 @@ public class GraphBuilder {
     private void updateNeighborsList(Vertex[] vertices){
         if (neighborsList.containsKey(vertices[0])){
             neighborsList.get(vertices[0]).add(vertices[1]);
-            return;
         }
-        ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
-        neighbors.add(vertices[1]);
-        neighborsList.put(vertices[0], neighbors);
+        else {
+            ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
+            neighbors.add(vertices[1]);
+            neighborsList.put(vertices[0], neighbors);
+        }
+        if (neighborsList.containsKey(vertices[1])){
+            neighborsList.get(vertices[1]).add(vertices[0]);
+        }
+        else {
+            ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
+            neighbors.add(vertices[0]);
+            neighborsList.put(vertices[1], neighbors);
+        }
+
     }
 
     /**

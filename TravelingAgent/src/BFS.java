@@ -12,7 +12,7 @@ public class BFS {
      * @param graph the graph
      * @return true iff there's a path between the source and the dest
      */
-    public static boolean bfs(Vertex src, Vertex dest, ArrayList<Edge> graph, HashMap<Vertex,
+    public static boolean bfs(Vertex src, Vertex dest, HashMap<Vertex,
             ArrayList<Vertex>> neighborsList){
         LinkedList<Vertex> Q = new LinkedList<Vertex>();
         Q.push(src);

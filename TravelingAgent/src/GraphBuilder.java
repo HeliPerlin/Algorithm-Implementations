@@ -17,6 +17,8 @@ public class GraphBuilder {
      */
     private final ArrayList<Edge> edges;
 
+    private final ArrayList<Vertex> vertices;
+
     /*
     the HashSet representing the vertices in the graph
      */
@@ -32,6 +34,7 @@ public class GraphBuilder {
      */
     public GraphBuilder(String filePath) throws FileNotFoundException {
         this.edges = new ArrayList<Edge>();
+        this.vertices = new ArrayList<Vertex>();
         this.neighborsList = new HashMap<Vertex, ArrayList<Vertex>>();
         this.graphDescriptionReader = new FileReader(filePath);
     }
@@ -47,10 +50,27 @@ public class GraphBuilder {
         while(scanner.hasNextLine()) {
             String line = scanner.nextLine();
             Integer[] edgeData = processLine(line);
-            Vertex[] vertices = new Vertex[] {new Vertex(edgeData[0]), new Vertex(edgeData[1])};
+            Vertex v1 = new Vertex(edgeData[0]);
+            Vertex v2 = new Vertex(edgeData[1]);
+            Vertex v1IfNotNull = v1.findVertexOfValue(vertices);
+            Vertex v2IfNotNull = v2.findVertexOfValue(vertices);
+            if (v1IfNotNull != null){
+                v1 = v1IfNotNull;
+            }
+            if (v2IfNotNull != null){
+                v2 = v2IfNotNull;
+            }
+            Vertex[] vertices = new Vertex[] {v1, v2};
             updateEdges(vertices, edgeData[2]);
             updateNeighborsList(vertices);
         }
+//        for (Edge e: edges){
+//            System.out.println("v1: " + e.getV1().value + ", v2: " + e.getV2().value + ", w: " + e.getWeight());
+//        }
+//        for (Vertex v: neighborsList.keySet()){
+//            System.out.println("I am: " + v.value + ", my neighbors are: " + neighborsList.get(v));
+//        }
+
     }
 
     /*
@@ -68,6 +88,8 @@ public class GraphBuilder {
     updates the data structure representing the edges with a new edge
      */
     private void updateEdges(Vertex[] vertices, Integer weight){
+        this.vertices.add(vertices[0]);
+        this.vertices.add(vertices[1]);
         edges.add(new Edge(vertices[0], vertices[1], weight));
     }
 
@@ -98,6 +120,7 @@ public class GraphBuilder {
      * @return the vertices of the graph
      */
     public HashMap<Vertex, ArrayList<Vertex>> getNeighborsList(){
+
         return this.neighborsList;
     }
 
@@ -107,4 +130,6 @@ public class GraphBuilder {
     public ArrayList<Edge> getEdges(){
         return this.edges;
     }
+
+
 }

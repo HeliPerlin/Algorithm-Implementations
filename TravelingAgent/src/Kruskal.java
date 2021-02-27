@@ -15,11 +15,17 @@ public class Kruskal {
         HashMap<Vertex, ArrayList<Vertex>> newNeighborsList = new HashMap<>();
         graph.sort(new EdgeComparator());
         for (Edge e: graph){
-            if (!isTherePath(e, neighborsList)){
+            if (!isTherePath(e, newNeighborsList)){
                 edges.add(e);
                 updateNeighborsList(newNeighborsList, e);
             }
         }
+//        for (Edge e: edges){
+//            System.out.println("v1: " + e.getV1().value + ", v2: " + e.getV2().value + ", w: " + e.getWeight());
+//        }
+//        for (Vertex v: newNeighborsList.keySet()){
+//            System.out.println("I am: " + v.value + ", my neighbors are: " + neighborsList.get(v));
+//        }
         return new minimumSpanningTree(edges, newNeighborsList);
     }
 
@@ -32,7 +38,7 @@ public class Kruskal {
         return BFS.bfs(e.getV1(), e.getV2(), neighborsList);
     }
 
-    private static HashMap<Vertex, ArrayList<Vertex>>  updateNeighborsList(HashMap<Vertex,
+    private static void  updateNeighborsList(HashMap<Vertex,
             ArrayList<Vertex>> neighborsList, Edge e){
         if (neighborsList.containsKey(e.getV1())){
             neighborsList.get(e.getV1()).add(e.getV2());
@@ -41,7 +47,6 @@ public class Kruskal {
             ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
             neighbors.add(e.getV2());
             neighborsList.put(e.getV1(), neighbors);
-            return neighborsList;
         }
         if (neighborsList.containsKey(e.getV2())){
             neighborsList.get(e.getV2()).add(e.getV1());
@@ -50,8 +55,6 @@ public class Kruskal {
             ArrayList<Vertex> neighbors = new ArrayList<Vertex>();
             neighbors.add(e.getV1());
             neighborsList.put(e.getV2(), neighbors);
-            return neighborsList;
         }
-        return neighborsList;
     }
 }

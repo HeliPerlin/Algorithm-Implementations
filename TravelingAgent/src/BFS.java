@@ -14,6 +14,9 @@ public class BFS {
      */
     public static boolean bfs(Vertex src, Vertex dest, HashMap<Vertex,
             ArrayList<Vertex>> neighborsList){
+        if (neighborsList == null){
+            return true;
+        }
         LinkedList<Vertex> Q = new LinkedList<Vertex>();
         Q.push(src);
         src.setVisited();

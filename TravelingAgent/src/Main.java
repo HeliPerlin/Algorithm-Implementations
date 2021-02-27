@@ -19,9 +19,9 @@ public class Main {
             ArrayList<Edge> edges = graphBuilder.getEdges();
             HashMap<Vertex, ArrayList<Vertex>> neighborsList = graphBuilder.getNeighborsList();
             minimumSpanningTree MSP = Kruskal.kruskal(edges, neighborsList);
-            ArrayList<Vertex> path = DFS.dfs(MSP, MSP.getEdges().get(0).getV1(),
-                    new ArrayList<Vertex>());
-            pathToString(path);
+//            ArrayList<Vertex> path = DFS.dfs(MSP, MSP.getEdges().get(0).getV1(),
+//                    new ArrayList<Vertex>());
+//            pathToString(path);
         }
         catch (IOException e){
             System.out.println(e);

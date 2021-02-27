@@ -1,4 +1,4 @@
-The Metric Travelling Salesman Problem: An approximating solution
+The Metric Travelling Salesman Problem: An Approximating Solution
 
 The program implements a 2-approximating solution to the "Metric Travelling Agent" NP-hard algorithmic problem.
 As input, the algorithm receives a whole, weighted, undirected graph, and returns a path that covers all

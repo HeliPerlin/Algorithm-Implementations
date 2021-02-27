@@ -1,6 +1,6 @@
-The Metric Travelling Agent
+The Metric Travelling Salesman Problem: An approximating solution
 
-The program implements a 2-approximating solution to the "Metric Travelling Agent" algorithmic problem.
+The program implements a 2-approximating solution to the "Metric Travelling Agent" NP-hard algorithmic problem.
 As input, the algorithm receives a whole, weighted, undirected graph, and returns a path that covers all
 of the vertices in the graph, with minimal weight. The implemented solution is 2-approximating, meaning it
 will always return a path in the graph with a weight that is no more than twice heavier the the weight of the

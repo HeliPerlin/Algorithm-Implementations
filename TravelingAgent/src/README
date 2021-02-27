@@ -5,6 +5,7 @@ As input, the algorithm receives a whole, weighted, undirected graph, and return
 of the vertices in the graph, with minimal weight. The implemented solution is 2-approximating, meaning it
 will always return a path in the graph with a weight that is no more than twice heavier the the weight of the
 optimal solution.
+To run the program, insert testFile.txt as the program argument and run the main method in Main.java
 
 The implemented algorithm is the following:
 1. Find a minimum spanning tree in the graph, using Kruskal's algorithm, who's using BFS.

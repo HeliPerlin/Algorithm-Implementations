@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
+/**
+ * implements Kruskal's algorithm
+ */
 public class Kruskal {
 
     /**
@@ -20,12 +23,6 @@ public class Kruskal {
                 updateNeighborsList(newNeighborsList, e);
             }
         }
-//        for (Edge e: edges){
-//            System.out.println("v1: " + e.getV1().value + ", v2: " + e.getV2().value + ", w: " + e.getWeight());
-//        }
-//        for (Vertex v: newNeighborsList.keySet()){
-//            System.out.println("I am: " + v.value + ", my neighbors are: " + neighborsList.get(v));
-//        }
         return new minimumSpanningTree(edges, newNeighborsList);
     }
 
@@ -38,6 +35,9 @@ public class Kruskal {
         return BFS.bfs(e.getV1(), e.getV2(), neighborsList);
     }
 
+    /*
+    adds a pair of neighbors (vertices) to the neighbors list
+     */
     private static void  updateNeighborsList(HashMap<Vertex,
             ArrayList<Vertex>> neighborsList, Edge e){
         if (neighborsList.containsKey(e.getV1())){

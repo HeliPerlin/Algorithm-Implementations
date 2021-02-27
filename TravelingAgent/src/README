@@ -1,0 +1,37 @@
+The Metric Travelling Agent
+
+The program implements a 2-approximating solution to the "Metric Travelling Agent" algorithmic problem.
+As input, the algorithm receives a whole, weighted, undirected graph, and returns a path that covers all
+of the vertices in the graph, with minimal weight. The implemented solution is 2-approximating, meaning it
+will always return a path in the graph with a weight that is no more than twice heavier the the weight of the
+optimal solution.
+
+The implemented algorithm is the following:
+1. Find a minimum spanning tree in the graph, using Kruskal's algorithm, who's using BFS.
+2. Initialize an empty group of vertices, which will by the end contain the returned solution
+2. Starting at an arbitrary source vertex from the graph, go over the vertices using DFS and save the vertices
+into the group , such that in each iteration the vertex is saved only if it's not yet there.
+3. add the source vertex to the group.
+4. return the group
+
+The implementation:
+The program receives a text file representing the graph (The program assumes the input is valid and in the
+correct format). The format is: any number of lines, each line represents a single edge in the graph in the
+following way: A single line contains exactly 3 integers separated by a single space, such that the first
+integer is the numeric value of the first vertex, the second value is the numeric value of the second vertex,
+and the third integer is the edges weight.
+The program parses the input file and creates a GraphBuilder object out of it, which holds a DS of the edges,
+the vertices, and the neighbors of each vertex. The graph builder represents the edges as an ArrayList of the
+object Edge that was described before. The neighbors list are represented as a HashMap, when the key is a
+single Vertex object and the value is an ArrayList of Vertices, specifically the ones that are connected to
+the key vertex by an edge.
+Then it performs Kruskal's algorithm and finds a minimum spanning tree. This algorithm uses the BFS algorithm
+in order to check if a path between two given vertices exists in the graph that is being built. Both Kruskal
+and BFS are implemented as static methods. The first step in Kruskal's algorithm is sorting the edges by their
+weight, and this is done using the sort method that is using an instance of the EdgeComparator class.
+As the BFS algorithm requires the ability to compare between two vertices, there is also an implementation of
+a comparison between two edges (equals).
+The next step is performing the DFS algorithm in order to find a path that includes all of the vertices in the
+MSP. This is done recursively. The last step is adding the first vertex in the returned path  once again, and
+this will be the returned solution. Hopefully there will also be a GUI visualisation of the solution in the
+future.

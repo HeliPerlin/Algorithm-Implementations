@@ -17,6 +17,9 @@ public class GraphBuilder {
      */
     private final ArrayList<Edge> edges;
 
+    /*
+    represents the vertices in the graph
+     */
     private final ArrayList<Vertex> vertices;
 
     /*
@@ -64,12 +67,6 @@ public class GraphBuilder {
             updateEdges(vertices, edgeData[2]);
             updateNeighborsList(vertices);
         }
-//        for (Edge e: edges){
-//            System.out.println("v1: " + e.getV1().value + ", v2: " + e.getV2().value + ", w: " + e.getWeight());
-//        }
-//        for (Vertex v: neighborsList.keySet()){
-//            System.out.println("I am: " + v.value + ", my neighbors are: " + neighborsList.get(v));
-//        }
 
     }
 

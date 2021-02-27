@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+/**
+ * implements the BFS algorithm for paths-searching in a graph
+ */
 public class BFS {
 
     /**
@@ -9,7 +12,6 @@ public class BFS {
      * BFS algorithm and returning true once the dest vertex is found
      * @param src the source vertex
      * @param dest the dest vertex
-     * @param graph the graph
      * @return true iff there's a path between the source and the dest
      */
     public static boolean bfs(Vertex src, Vertex dest, HashMap<Vertex,
@@ -19,20 +21,34 @@ public class BFS {
         }
         LinkedList<Vertex> Q = new LinkedList<Vertex>();
         Q.push(src);
-        src.setVisited();
+        src.setVisited(true);
         while (!Q.isEmpty()){
             Vertex v = Q.pop();
+            if (neighborsList.get(v) == null){
+                continue;
+            }
             for (Vertex neighbors: neighborsList.get(v)){
                 if (neighbors.equals(dest)){
+                    resetVisit(neighborsList);
                     return true;
                 }
                 if (!neighbors.isVisited()){
                     Q.push(neighbors);
-                    neighbors.setVisited();
+                    neighbors.setVisited(true);
                 }
             }
         }
+        resetVisit(neighborsList);
         return false;
+    }
+
+    /*
+     * sets all of the vertices as not visited
+     */
+    private static void resetVisit(HashMap<Vertex, ArrayList<Vertex>> neighborsList){
+        for (Vertex v: neighborsList.keySet()){
+            v.setVisited(false);
+        }
     }
 }
 

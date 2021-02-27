@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * implements the main class that runs the program
+ */
 public class Main {
 
     /**
@@ -19,16 +22,17 @@ public class Main {
             ArrayList<Edge> edges = graphBuilder.getEdges();
             HashMap<Vertex, ArrayList<Vertex>> neighborsList = graphBuilder.getNeighborsList();
             minimumSpanningTree MSP = Kruskal.kruskal(edges, neighborsList);
-//            ArrayList<Vertex> path = DFS.dfs(MSP, MSP.getEdges().get(0).getV1(),
-//                    new ArrayList<Vertex>());
-//            pathToString(path);
+            Vertex src = MSP.getEdges().get(0).getV1();
+            ArrayList<Vertex> path = DFS.dfs(MSP, src, new ArrayList<Vertex>());
+            path.add(src);
+
         }
         catch (IOException e){
             System.out.println(e);
         }
     }
 
-    /**
+    /*
      * Presents a visualisation of the returned solution
      * @param path the returned solution to present
      */
